@@ -1,59 +1,83 @@
-CONTBTIR
-A Universal PC Remote Control Board
+# CONTBTIR
+## Universal PC Remote Control Board – IR, Bluetooth & USB
 
-<p align="center"> <img src="3d1.png" width="45%" alt="CONTBTIR PCB 3D View"> <img src="3d2.png" width="45%" alt="CONTBTIR PCB 3D View - Alternate Angle"> </p>
+<p align="center"> <img src="3d1.png" width="48%" alt="CONTBTIR PCB 3D View 1"> <img src="3d2.png" width="48%" alt="CONTBTIR PCB 3D View 2"> </p>
 
-<p align="center"> <b>One Board. One USB Connection. Complete PC Control.</b> </p>
+<p align="center"> <b>One Board. Multiple Control Methods. Complete PC Control.</b> </p>
 
-📌 Overview
+<p align="center"> <img src="https://img.shields.io/badge/Hardware-Custom%20PCB-blue"> <img src="https://img.shields.io/badge/MCU-CH552G-orange"> <img src="https://img.shields.io/badge/Wireless-ESP32--C3-green"> <img src="https://img.shields.io/badge/Interface-USB%20%7C%20IR%20%7C%20Bluetooth-purple"> <img src="https://img.shields.io/badge/Status-Development-yellow"> </p>
 
-CONTBTIR is a compact, multifunctional hardware project designed to control a personal computer remotely using a single USB-connected board.
+📌 1. Project Overview
 
-The main goal of this project is to provide a centralized solution for controlling a PC through different wireless and infrared interfaces without requiring multiple separate adapters or controllers.
+CONTBTIR is a compact, multifunctional PC remote control board designed to control a computer using a single hardware device.
 
-The board combines two microcontrollers:
+The main purpose of this project is to combine multiple remote-control technologies into one PCB, eliminating the need for separate USB adapters and wireless receivers.
 
-CH552G – Handles USB communication with the computer.
-ESP32-C3 – Provides wireless connectivity and additional control capabilities.
+The board is designed around two main microcontrollers:
 
-The intended control methods include:
+CH552G: Handles USB communication and the PC interface.
+ESP32-C3: Provides wireless communication capabilities, including Bluetooth.
+
+The intended functionality includes:
 
 Infrared (IR) remote control.
 Bluetooth wireless control.
-USB communication with the host computer.
+USB communication with a computer.
+Remote PC control through a single compact board.
 
-The ultimate goal is to allow users to control their PC remotely using a conventional IR remote or a Bluetooth-compatible device.
+The project aims to provide a simple and flexible solution for controlling a PC remotely using an ordinary IR remote or a Bluetooth-compatible device.
 
-✨ Features
+✨ 2. Main Features
 Single-board PC remote control solution.
+CH552G USB controller.
+ESP32-C3 wireless controller.
+Infrared remote control support.
+Bluetooth Low Energy (BLE) capability.
 USB connectivity.
-CH552G-based USB interface.
-ESP32-C3-based wireless functionality.
-IR remote control support.
-Bluetooth Low Energy (BLE) capability through ESP32-C3.
-Compact PCB design.
-Dedicated programming access points.
-Easy firmware uploading without directly touching small IC pins.
-🧠 Hardware Architecture
+Compact custom PCB design.
+Independently programmable microcontrollers.
+Accessible firmware programming points.
+No need to directly touch tiny IC pins during programming.
+🖥️ 3. PCB Design
 
-The project uses two main microcontrollers, each responsible for different tasks.
+The PCB has been designed to integrate the main components and communication interfaces into a single board.
 
-1. CH552G – USB Controller
+3D PCB Visualization
 
-The CH552G is responsible for USB communication with the computer.
+<p align="center"> <img src="3d1.png" width="80%" alt="CONTBTIR PCB Front View"> </p>
 
-Its primary responsibilities include:
+<p align="center"> <img src="3d2.png" width="80%" alt="CONTBTIR PCB Alternate View"> </p>
 
-USB communication.
-Interfacing with the PC.
-Handling the USB-side functionality of the board.
-Receiving and forwarding control commands.
+3D visualization of the CONTBTIR hardware design.
 
-The CH552G also has a dedicated USB bootloader programming interface.
+⚡ 4. Circuit Schematic
 
-2. ESP32-C3 – Wireless Controller
+The complete electrical schematic is provided below.
 
-The ESP32-C3 provides the wireless capabilities of the board.
+<p align="center"> <img src="schem.png" width="100%" alt="CONTBTIR Electrical Schematic"> </p>
+
+The schematic contains the electrical connections between the CH552G, ESP32-C3, USB interface, power circuitry and other PCB components.
+
+🧠 5. Hardware Architecture
+
+CONTBTIR uses two independent microcontrollers.
+
+5.1 CH552G – USB Controller
+
+The CH552G is responsible for the USB-side functionality.
+
+Its intended responsibilities include:
+
+USB communication with the computer.
+USB interface management.
+Handling PC-side communication.
+Processing or forwarding control commands.
+
+The CH552G can be programmed independently through its USB bootloader.
+
+5.2 ESP32-C3 – Wireless Controller
+
+The ESP32-C3 provides the wireless communication capabilities.
 
 Its intended responsibilities include:
 
@@ -62,241 +86,251 @@ Wireless command reception.
 Communication with the CH552G.
 Handling wireless control functionality.
 
-The ESP32-C3 can be programmed independently of the CH552G.
+The ESP32-C3 has a separate firmware programming procedure.
 
-🔧 PCB Design
+🔧 6. Firmware Programming Guide
 
-The repository contains the following hardware design files:
+One of the most important design features of CONTBTIR is its easily accessible programming points.
 
-File	Description
-3d1.png	PCB 3D visualization
-3d2.png	PCB 3D visualization from another angle
-schem.png	Electrical schematic
-BOM_Board1_PCB1_2026-10-30.xlsx	Bill of Materials
-PickAndPlace_PCB1_2026-10-30.xlsx	Component placement coordinates
-Gerber_PCB1_2026-10-30.zip	PCB manufacturing files
+Both microcontrollers can be placed into programming mode without directly touching their small IC pins.
 
-These files can be used to inspect, manufacture and assemble the PCB.
-
-⚡ Firmware Programming Guide
-
-One of the most important design considerations of CONTBTIR is making firmware programming as easy as possible.
-
-Both microcontrollers have accessible programming points, so users do not need to touch their tiny IC pins directly.
-
-IMPORTANT: A pair of fine-tipped tweezers is recommended for activating the programming modes.
+Only a pair of fine-tipped conductive tweezers is required to activate the programming points.
 
 There are two separate programming procedures.
 
-1. CH552G Firmware Programming
-Programming Mode Activation
+6.1 CH552G Firmware Programming
+Programming Mode Activation Through C1
 
-The CH552G uses its USB bootloader to receive firmware.
+The CH552G uses its USB bootloader for firmware uploading.
 
-On this PCB, the programming activation point is conveniently accessible through capacitor C1.
+On this PCB, the programming activation point is accessible through capacitor C1.
 
-Instead of trying to reach the small CH552G pins, you can use the two pads of C1.
+Instead of touching the tiny CH552G pins, users can activate the programming mode directly through the two terminals of C1.
 
-📍 Where Should You Touch?
+📍 Programming Point Location
 
-Locate capacitor C1, positioned on the right-hand side of the board.
+<p align="center"> <img src="docs/images/ch552g-c1-programming.png" width="85%" alt="CH552G C1 Programming Point"> </p>
 
-You will see two small solder pads.
+Programming point: Both terminals of capacitor C1.
 
-These are the programming activation points.
-
-The procedure:
-
-Locate capacitor C1 on the PCB.
+Step-by-Step Instructions
+Locate capacitor C1 on the right-hand side of the PCB.
 Prepare a pair of conductive tweezers.
-Place the tweezer tips on the two opposite terminals of C1 simultaneously.
-This temporarily connects the two pads.
-While maintaining this connection, connect the board to your computer using USB.
-Release the tweezers once the board has entered its USB bootloader mode.
-Your computer should now be able to detect the CH552G bootloader.
-Upload the firmware using a compatible CH552G programming tool.
+Place one tweezer tip on the first terminal of C1.
+Place the other tweezer tip on the second terminal of C1.
+Temporarily bridge both terminals.
+While maintaining the connection, connect the board to your computer through USB.
+Release the tweezers after the bootloader entry sequence.
+The computer should detect the CH552G bootloader.
+Upload the firmware using a compatible CH552G flashing tool.
 Why Does This Work?
 
-The CH552G USB bootloader requires its USB data-line programming condition to be activated.
+In this PCB design, one terminal of C1 is connected to the V33 supply, while the other terminal is connected to the filtered UDP (USB D+) line.
 
-In this PCB design, one terminal of C1 is connected to the V33 supply, while the other terminal is connected to the filtered UDP (USB D+) programming-related line.
+Temporarily bridging these terminals pulls the USB data line to the required logic level for the intended programming-entry sequence.
 
-By temporarily bridging these two terminals, the USB data line is pulled to the required logic level.
+This allows the user to activate the CH552G bootloader without directly accessing the microcontroller pins.
 
-This makes it possible to activate the bootloader without directly accessing the CH552G's small physical pins.
+Quick Summary
+Item	Description
+Microcontroller	CH552G
+Component	C1
+Programming point	Both capacitor terminals
+Required action	Temporarily bridge both terminals
+Connection	USB
+Result	USB bootloader activation
+⚠️ IMPORTANT: Never leave C1 permanently shorted. Confirm the schematic connections before performing this procedure. Avoid accidentally connecting V33 to GND.
+6.2 ESP32-C3 Firmware Programming
+Programming Mode Activation Through R3
 
-In short:
+The ESP32-C3 has a separate firmware programming interface.
 
-C1 Pad 1 + C1 Pad 2 → Temporary Short → Connect USB → Release → Flash Firmware
+The ESP32-C3 enters its download mode when GPIO9 is held LOW during the appropriate reset sequence.
 
-⚠️ Important: Perform this procedure only during the USB connection/bootloader-entry sequence. Do not leave the pads permanently shorted. Confirm the actual PCB net connections before performing the procedure. Never bridge unrelated power or ground pads.
-2. ESP32-C3 Firmware Programming
+On this PCB, the GPIO9 programming point is accessible through resistor R3.
 
-The ESP32-C3 has a separate programming interface.
+This avoids the need to touch the tightly spaced pins underneath the ESP32-C3 module.
 
-Unlike the CH552G, the ESP32-C3 enters its download mode by holding GPIO9 LOW (GND) during reset.
+📍 Programming Point Location
 
-The programming point is also accessible without touching the ESP32-C3 module's tiny pins.
+<p align="center"> <img src="docs/images/esp32c3-r3-programming.png" width="85%" alt="ESP32-C3 R3 GPIO9 Programming Point"> </p>
 
-📍 Where Should You Touch?
+Programming point: Lower terminal of R3, close to the ESP32-C3 module.
 
+Step-by-Step Instructions
 Locate the ESP32-C3 module, identified as U2.
-
-Immediately to the upper-left side of the module, you will find resistor R3.
-
-The lower terminal of R3 (the terminal closer to the module, according to the PCB orientation) is used as the accessible GPIO9 programming point.
-
-You will also need a GND connection.
-
-Convenient GND locations include:
-
-The large exposed GND copper area on the PCB.
-The metal shielding of the USB connector, provided it is electrically connected to GND.
-The Procedure
-Locate the ESP32-C3 module (U2).
-Locate resistor R3 immediately to its upper-left.
-Identify the lower terminal of R3, closer to the module.
-Take a pair of conductive tweezers.
+Find resistor R3, immediately to the upper-left of the module.
+Identify the lower terminal of R3, closer to the ESP32-C3 module.
+Prepare conductive tweezers.
 Touch one tweezer tip to the lower terminal of R3.
-Touch the other tweezer tip to the PCB's GND plane or USB connector metal shell.
+Touch the other tweezer tip to the PCB GND plane.
+Alternatively, use the USB connector's metal shell if it is electrically connected to GND.
 This temporarily pulls GPIO9 LOW.
-While maintaining the connection, reset or power-cycle the ESP32-C3.
-Release the connection after the chip has entered download mode.
-Connect to the ESP32-C3 using a compatible USB flashing tool.
-Upload your firmware.
+While holding GPIO9 LOW, reset or power-cycle the ESP32-C3.
+Release the connection after the chip enters download mode.
+Connect to the ESP32-C3 using a compatible flashing tool.
+Upload the firmware.
 Why Does This Work?
 
 The ESP32-C3 uses GPIO9 as a boot-strapping pin.
 
-When GPIO9 is held LOW during the appropriate reset sequence, the chip enters its serial download boot mode instead of starting the normal application firmware.
+When GPIO9 is held LOW during reset, the chip enters its serial download boot mode instead of executing the normal application firmware.
 
-In this PCB design, R3 provides an accessible connection to the GPIO9 programming signal.
+R3 provides an accessible connection to this programming signal.
 
-This eliminates the need to touch the ESP32-C3 module's tightly spaced pins.
+This makes firmware uploading easier without touching the ESP32-C3 module's tiny pins.
 
-In short:
+Quick Summary
+Item	Description
+Microcontroller	ESP32-C3
+Component	R3
+Programming point	Lower terminal of R3
+Required connection	GPIO9 to GND
+Timing	During reset or power-up
+Result	Download mode
+⚠️ IMPORTANT: GPIO9 must be LOW when the ESP32-C3 samples its boot configuration during reset. Grounding GPIO9 after the chip has already started running may not activate download mode.
+🔍 7. Programming Points – Comparison
 
-R3 GPIO9 Point + GND → GPIO9 LOW → Reset/Power Cycle → Download Mode → Flash Firmware
+Both microcontrollers have dedicated and easily accessible programming points.
 
-⚠️ Important: GPIO9 must be LOW when the ESP32-C3 samples its boot configuration during reset. Simply grounding GPIO9 after the chip has already started running will not necessarily activate download mode. Release the connection after entering download mode.
-🛠️ Programming Point Summary
-Microcontroller	Programming Point	Required Connection	Purpose
-CH552G	C1 capacitor pads	Temporarily bridge both pads	Activate USB bootloader
-ESP32-C3	Lower terminal of R3	GPIO9 to GND	Enter download mode
-Quick Reference
+Feature	CH552G	ESP32-C3
+Component	C1	R3
+Programming signal	UDP / USB D+	GPIO9
+Activation method	Bridge both C1 terminals	Connect GPIO9 to GND
+Required tool	Tweezers	Tweezers
+Connection	USB	USB
+Programming mode	USB bootloader	Serial download mode
+Direct IC pin access	Not required	Not required
+Programming Point Reference
 
 CH552G:
 
-Component: C1
-Action: Short both capacitor terminals.
-Timing: During USB connection.
-Result: CH552G bootloader activation.
+C1 Terminal 1 + C1 Terminal 2 → Temporary Bridge → USB Connection
 
 ESP32-C3:
 
-Component: R3
-Action: Connect the accessible GPIO9 point to GND.
-Timing: During reset or power-up.
-Result: ESP32-C3 download mode.
-💻 Firmware and Software
+R3 GPIO9 Terminal + GND → GPIO9 LOW → Reset → Download Mode
 
-The project is designed around two independently programmable microcontrollers.
+💻 8. Firmware Development
 
-Each controller requires its own compatible firmware.
+The project uses two independently programmable microcontrollers.
 
-CH552G
+Each microcontroller requires its own compatible firmware.
 
-The CH552G firmware is responsible for the USB-side communication and PC interface.
+CH552G Development
 
-A compatible CH552G development and flashing environment is required.
+The CH552G firmware handles USB-side functionality.
 
-ESP32-C3
+Compatible development and flashing environments can be used to compile and upload the firmware.
 
-The ESP32-C3 firmware is responsible for wireless communication and related control functions.
+ESP32-C3 Development
 
-Possible development environments include:
+The ESP32-C3 firmware handles wireless functionality.
+
+Supported development environments include:
 
 ESP-IDF.
-Arduino IDE with ESP32 support.
-Other compatible ESP32-C3 development tools.
+Arduino IDE with ESP32 board support.
+Other compatible ESP32-C3 development environments.
 
-Note: Firmware source code, flashing configurations and software installation instructions should be added as they become available.
+Note: Firmware source code and detailed software configuration instructions will be added to the repository as development progresses.
 
-📦 Manufacturing
+📦 9. PCB Manufacturing Files
 
-The repository includes the necessary PCB manufacturing and assembly resources.
+The repository contains the hardware files required for PCB manufacturing and assembly.
 
+File	Description
+3d1.png	PCB 3D visualization
+3d2.png	Alternative PCB 3D visualization
+schem.png	Electrical schematic
+BOM_Board1_PCB1_2026-10-30.xlsx	Bill of Materials
+PickAndPlace_PCB1_2026-10-30.xlsx	Pick and Place coordinates
+Gerber_PCB1_2026-10-30.zip	PCB manufacturing files
 Gerber Files
 
-The Gerber_PCB1_2026-10-30.zip archive contains the PCB manufacturing outputs.
+The Gerber archive contains the manufacturing data required by PCB fabrication services.
 
-These files can be submitted to a PCB fabrication service.
+Bill of Materials (BOM)
 
-Bill of Materials
-
-The BOM spreadsheet contains the component list required for PCB assembly.
+The BOM spreadsheet lists the electronic components required to assemble the PCB.
 
 Pick and Place
 
-The Pick and Place spreadsheet provides component positioning information for automated PCB assembly.
+The Pick and Place spreadsheet contains component placement coordinates for automated assembly.
 
-⚠️ Safety and Hardware Precautions
+⚠️ 10. Safety and Programming Precautions
 
-Please read these instructions before programming or handling the PCB.
+Please read these precautions before programming the board.
 
-Always verify the programming points against the schematic before applying power.
-Use fine-tipped tweezers to avoid accidentally shorting neighboring components.
-Do not bridge C1 pads continuously.
-Do not accidentally short V33 directly to GND.
-Avoid touching multiple component terminals simultaneously.
-Ensure the USB connector is correctly aligned before connecting it.
+Always verify the programming points against the electrical schematic.
+Use fine-tipped conductive tweezers.
+Avoid accidentally shorting neighboring component pads.
+Never leave C1 terminals permanently connected.
+Never short V33 directly to GND.
+Make sure the USB connector is correctly connected.
 Do not apply external voltage to USB data lines.
-Make sure the correct firmware is selected for each microcontroller.
-Avoid programming the CH552G and ESP32-C3 simultaneously unless the firmware and hardware configuration explicitly support it.
+Verify the R3 GPIO9 connection before programming.
+Ensure GPIO9 is LOW during the appropriate reset sequence.
+Use the correct firmware for each microcontroller.
+Avoid programming both microcontrollers simultaneously unless the hardware and firmware explicitly support it.
 
-Programming should be performed carefully. Incorrect connections can permanently damage the microcontrollers or other PCB components.
+Incorrect connections may permanently damage the PCB or its components.
 
-📂 Repository Structure
+📂 11. Repository Structure
 text
 CONTBTIR/
 │
+├── README.md
+├── LICENSE
+│
 ├── 3d1.png
 ├── 3d2.png
-│
 ├── schem.png
 │
 ├── BOM_Board1_PCB1_2026-10-30.xlsx
-│
 ├── PickAndPlace_PCB1_2026-10-30.xlsx
+├── Gerber_PCB1_PCB1_2026-10-30.zip
 │
-├── Gerber_PCB1_2026-10-30.zip
-│
-├── LICENSE
-│
-└── README.md
+└── docs/
+    └── images/
+        ├── ch552g-c1-programming.png
+        └── esp32c3-r3-programming.png
 
-🎯 Project Goal
+🚀 12. Future Development
 
-The main objective of CONTBTIR is simple:
+Potential future improvements include:
 
-Control your PC using a single compact board instead of relying on multiple different remote-control adapters.
+Expanded IR remote compatibility.
+Custom Bluetooth control software.
+Wireless PC command interface.
+Additional remote-control functions.
+Improved firmware management.
+Dedicated PC control application.
+Additional configuration and customization options.
+🎯 13. Project Goal
 
-By combining USB connectivity, infrared control and Bluetooth wireless communication, CONTBTIR aims to provide a convenient and flexible PC control solution.
+The main goal of CONTBTIR is to make PC remote control easier by combining multiple technologies into one compact hardware platform.
 
-The accessible programming points also make firmware development, testing and updating easier.
+Instead of using separate infrared receivers, Bluetooth adapters and additional control hardware, CONTBTIR aims to provide a unified solution.
 
-📜 License
+Its accessible programming points also make firmware development and hardware maintenance easier.
 
-This project is licensed under the MIT License.
+One PCB. Two microcontrollers. Multiple ways to control your PC.
 
-See the LICENSE file for more information.
+📜 14. License
 
-👨‍💻 Author
+This project is distributed under the license specified in the repository's LICENSE file.
+
+Please review the license before using, modifying or distributing the hardware design.
+
+👨‍💻 15. Author
 
 ALP GIRAY ALTUNSOY
 
 Project: CONTBTIR
 
-GitHub: https://github.com/alpgirayaltunsoy-alp/CONTBTIR
+GitHub Repository:
 
-<p align="center"> <b>CONTBTIR — One Board, Multiple Ways to Control Your PC.</b> </p>
+https://github.com/alpgirayaltunsoy-alp/CONTBTIR
+
+<p align="center"> <b>CONTBTIR</b> <br> Universal PC Remote Control Board <br> IR • Bluetooth • USB <br><br> <i>One Board, Multiple Ways to Control Your PC.</i> </p>
