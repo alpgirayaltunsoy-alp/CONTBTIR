@@ -5,7 +5,7 @@
 
 <p align="center"> <b>One Board. Multiple Control Methods. Complete PC Control.</b> </p>
 
-<p align="center"> <img src="https://img.shields.io/badge/Hardware-Custom%20PCB-blue"> <img src="https://img.shields.io/badge/MCU-CH552G-orange"> <img src="https://img.shields.io/badge/Wireless-ESP32--C3-green"> <img src="https://img.shields.io/badge/Interface-USB%20%7C%20IR%20%7C%20Bluetooth-purple"> <img src="https://img.shields.io/badge/Status-Development-yellow"> </p>
+<p align="center"> <img src="https://img.shields.io/badge/Hardware-Custom%20PCB-blue"> <img src="https://img.shields.io/badge/MCU-CH552G-orange"> <img src="https://img.shields.io/badge/Wireless-ESP32--C3-green"> <img src="https://img.shields.io/badge/Interface-USB%20%7C%20IR%20%7C%20Bluetooth-purple"> <img src="https://img.shields.io/badge/Status-Development-yellow"> <img src="https://img.shields.io/badge/license-MIT-orange">  </p>
 
 📌 1. Project Overview
 
